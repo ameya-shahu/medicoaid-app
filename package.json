@@ -1,0 +1,21 @@
+{
+  "name": "medicoaid_app",
+  "version": "1.0.0",
+  "description": "MedicoAid is system which can assist doctors in paitent monitoring as well as provide insights on medical images with the help of deep learning algorithms.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Team MedicoAid",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
