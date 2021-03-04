@@ -1,0 +1,30 @@
+const express = require('express')
+const dotenv = require('dotenv')
+
+//Middlewares
+const error = require('./middlewares/errorMiddleware');
+
+// router imports
+const UserRoute = require('./routes/userRoutes')
+
+dotenv.config();
+
+const app = express();
+
+// database connection
+require('./config/dbConnect')();
+
+app.use(express.json());
+
+// Routes
+app.use('/api/users', UserRoute);
+
+
+// errorhandler
+app.use(error.errorMiddleware)
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, ()=>{
+    console.log(`${new Date()} --  Backend server is running on port no ${PORT}`)
+});
+
