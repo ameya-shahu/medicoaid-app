@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const user = require('../models/User')
+const User = require('../models/User')
 const asyncHandler = require('express-async-handler')
 
 
@@ -13,6 +13,7 @@ module.exports = authMiddleware = asyncHandler(async (req, res,next)=>{
             next();
         } catch (error) {
             res.status(401);
+            //console.warn(error);
             throw new Error('Not authorised, invalid token');
         }
     }else{
