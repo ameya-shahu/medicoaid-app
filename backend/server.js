@@ -22,12 +22,11 @@ app.use(express.json());
 
 
 
-
 // Routes
 app.use('/api/users', UserRoute);
 
 // Public files
-app.use('/static',authMiddleware, express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/public'));
 
 // errorhandler
 app.use(error.errorMiddleware)

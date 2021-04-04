@@ -6,6 +6,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'please enter name'],
     },
+    department:{
+        type: String
+    },
     email:{
         type: String,
         required: [true,'Please enter E-mail ID'],
@@ -25,7 +28,29 @@ const UserSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: [true,'please mention your gender']
-    }
+    },
+    address: {
+        street1:{
+            type: String,
+            required: [true, 'address street1 is not present.']
+        },
+        street2: {
+            type: String,
+            required: [true, 'address street1 is not present.']
+        },
+        city: {
+            type: String,
+            required: [true, 'address street1 is not present.']
+        },
+        state: {
+            type: String,
+            required: [true, 'state is entered']
+        },
+        country: {
+            type: String,
+            required: [true, 'country is not entered']
+        },
+    },
 });
 
 UserSchema.pre('save', async function(next){
