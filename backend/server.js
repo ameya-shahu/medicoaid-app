@@ -3,9 +3,11 @@ const dotenv = require('dotenv')
 
 //Middlewares
 const error = require('./middlewares/errorMiddleware');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 // router imports
-const UserRoute = require('./routes/userRoutes')
+const UserRoute = require('./routes/userRoutes');
+
 
 dotenv.config();
 
@@ -14,11 +16,17 @@ const app = express();
 // database connection
 require('./config/dbConnect')();
 
+
+
 app.use(express.json());
+
+
 
 // Routes
 app.use('/api/users', UserRoute);
 
+// Public files
+app.use('/static', express.static(__dirname + '/public'));
 
 // errorhandler
 app.use(error.errorMiddleware)
