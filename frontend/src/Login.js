@@ -2,30 +2,56 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import { Form } from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
+import { login } from './features/userSlice'
+import { loginUserAction } from './redux/actions/users/userActions'
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    //dispatch(login user action function({email, password});
-}
 
 function Login() {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    
+    const dispatch = useDispatch();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(loginUserAction(email, password));
+    }
+
 
     return (
         <Container>
             <Headers>
-                
                 <LineOne>LogIn</LineOne>
                 <TagLineOne>now to check</TagLineOne>
                 <Tag>This is a prototype, so don't <br />consider this as the final<br /> aaplication</Tag>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={(e) => handleSubmit(e)} >
                     <InputFields>
-                        <First placeholder='Email-Id' type='text' onChange={(e)=> setEmail(e.target.value)}></First>
-                        <Second placeholder='Password' type='text' onChange={(e)=> setPassword(e.target.value)}></Second>
-                        <SubmitButton>Submit</SubmitButton>
+                        <Name 
+                            value={name} 
+                            placeholder='Enter Name' 
+                            type='text' 
+                            onChange={(e) => setName(e.target.value)}
+                            
+                        />
+                       
+                        <First 
+                            value={email} 
+                            placeholder='Email-Id' 
+                            type='text' 
+                            onChange={(e)=> setEmail(e.target.value)}
+                            
+                        />
+                        
+                        <Second 
+                            value={password} 
+                            placeholder='Password' 
+                            type='password' 
+                            onChange={(e)=> setPassword(e.target.value)}
+                        />
+                        
+                        <SubmitButton type='submit'>Submit</SubmitButton>
                         <Link to='/register'>
                             <CreateAcount>Don't have an Account? Create One now!</CreateAcount>
                         </Link>
@@ -69,8 +95,17 @@ const InputFields = styled.div`
     place-items: center;
 
 `
+const Name = styled.input`
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    :focus{
+        outline: none;
+    }
+`
 
 const First = styled.input`
+    margin-top: 15px;
     padding: 15px;
     border: none;
     border-radius: 4px;

@@ -5,9 +5,12 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import ThankYou from './ThankYou';
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
 
 function App() {
-  let user = false;
+  const user = useSelector(selectUser);
+  
   return (
     <Router>
       {

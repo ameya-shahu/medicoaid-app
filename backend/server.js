@@ -16,8 +16,6 @@ const app = express();
 // database connection
 require('./config/dbConnect')();
 
-
-
 app.use(express.json());
 
 

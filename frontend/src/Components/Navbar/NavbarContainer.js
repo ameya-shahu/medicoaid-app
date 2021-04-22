@@ -3,8 +3,19 @@ import styled from 'styled-components'
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import './Navbar.css'
 import {Link} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, selectUser } from '../../features/userSlice'
 
 function NavbarContainer() {
+
+    const user = useSelector(selectUser);
+
+    const dispatch = useDispatch();
+    const handleLogout = (e) => {
+        e.preventDefault();
+
+        dispatch(logout());
+    }
     return (
         <Container>
             <Navbar collapseOnSelect expand="lg" variant="dark">
@@ -16,9 +27,9 @@ function NavbarContainer() {
                     <Nav className="ml-auto mr-5">
                     <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Sign Out</NavDropdown.Item>
+                        <NavDropdown.Item onClick={(e) => handleLogout(e)}>Sign Out</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Application info</NavDropdown.Item>
+                        <NavDropdown.Item>{user.name}</NavDropdown.Item>
                     </NavDropdown> 
                     </Nav>
                 </Navbar.Collapse>

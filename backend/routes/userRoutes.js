@@ -19,8 +19,9 @@ UserRoute.post(
         // check if email present in request json or not
 
         const { email } = req.body;
+        console.log(request.body);
         const userExists = await User.findOne({ email: email })
-
+    
         if (userExists) {
             res.status(400);
             throw new Error(JSON.stringify({ "email": "User already exists with same email id" }));
