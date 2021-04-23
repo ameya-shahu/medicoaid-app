@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css';
 import NavbarContainer from './Components/Navbar/NavbarContainer';
 import Home from './Home';
@@ -6,15 +7,15 @@ import Login from './Login';
 import Register from './Register';
 import ThankYou from './ThankYou';
 import { useSelector } from 'react-redux';
-import { selectUser } from './features/userSlice';
 
-function App() {
-  const user = useSelector(selectUser);
-  
+const App = () => {
+
+  const userInfo = useSelector(state => state.userLogin.userInfo);
+
   return (
     <Router>
       {
-        !user ? (
+        !userInfo ? (
           <Switch>
             <Route path='/register'>
               <Register />
@@ -30,12 +31,10 @@ function App() {
           <div className="App">
             <NavbarContainer />
               <Switch>
-                <Route path="/">
-                  <Home />
-                </Route>
+                <Route path='/addPatient' component={ThankYou} />
+                <Route path="/" component={Home} />
                 
               </Switch>
-              
             </div>
         )
       }

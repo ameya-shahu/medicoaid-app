@@ -1,11 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from './Components/Footer/Footer'
 
 function Home() {
     return (
         <Container>
-            <AddPatientButton>+ Add more Patients</AddPatientButton>
+            <Link to='/addPatient'>
+                <AddPatientButton>+ Add more Patients</AddPatientButton>
+            </Link>
             <DiseaseDetection>Disease Detection</DiseaseDetection>
             <PatientDetection>Patients Details</PatientDetection>
             <Footer />

@@ -1,67 +1,72 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
-import {useDispatch} from 'react-redux'
-import { login } from './features/userSlice'
+import { useDispatch } from 'react-redux'
 import { loginUserAction } from './redux/actions/users/userActions'
+import { useHistory } from "react-router-dom";
 
 
-function Login() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const Login = () => {
+    //if url is not matching to the initial url then it changes back to the initial
+    const URL = window.location.href;
+    var res = URL.split("/");
+    const history = useHistory();
+    useEffect(() => {
+        if (res.length > 1) {
+            history.push('/');
+        }
+    }, []);
 
-    const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(loginUserAction(email, password));
-    }
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+const dispatch = useDispatch();
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUserAction(email, password));
+}
 
 
-    return (
-        <Container>
-            <Headers>
-                <LineOne>LogIn</LineOne>
-                <TagLineOne>now to check</TagLineOne>
-                <Tag>This is a prototype, so don't <br />consider this as the final<br /> aaplication</Tag>
-                <Form onSubmit={(e) => handleSubmit(e)} >
-                    <InputFields>
-                        <Name 
-                            value={name} 
-                            placeholder='Enter Name' 
-                            type='text' 
-                            onChange={(e) => setName(e.target.value)}
-                            
-                        />
-                       
-                        <First 
-                            value={email} 
-                            placeholder='Email-Id' 
-                            type='text' 
-                            onChange={(e)=> setEmail(e.target.value)}
-                            
-                        />
-                        
-                        <Second 
-                            value={password} 
-                            placeholder='Password' 
-                            type='password' 
-                            onChange={(e)=> setPassword(e.target.value)}
-                        />
-                        
-                        <SubmitButton type='submit'>Submit</SubmitButton>
-                        <Link to='/register'>
-                            <CreateAcount>Don't have an Account? Create One now!</CreateAcount>
-                        </Link>
-                        
-                    </InputFields>
-                </Form>
-                
-            </Headers>
-        </Container>
-    )
+return (
+    <Container>
+        <Headers>
+            <LineOne>LogIn</LineOne>
+            <TagLineOne>now to check</TagLineOne>
+            <Tag>This is a prototype, so don't <br />consider this as the final<br /> aaplication</Tag>
+            <Form onSubmit={(e) => handleSubmit(e)} >
+                <InputFields>
+
+
+                    <First
+                        value={email}
+                        placeholder='Email-Id'
+                        type='text'
+                        onChange={(e) => setEmail(e.target.value)}
+
+                    />
+
+                    <Second
+                        value={password}
+                        placeholder='Password'
+                        type='password'
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <SubmitButton type='submit'>Submit</SubmitButton>
+
+                    <CreateAcount>
+                        Don't have an Account?<br /> Create One now...<br />
+                        <Link to='/register'><p>Click here!</p></Link>
+                    </CreateAcount>
+                </InputFields>
+            </Form>
+
+        </Headers>
+    </Container>
+)
 }
 
 export default Login
@@ -81,7 +86,7 @@ const LineOne = styled.div`
     font-size: 42px;
     font-weight: 700;
 `
-const TagLineOne =styled.div`
+const TagLineOne = styled.div`
     margin-top: -10px;
 `
 const Tag = styled.div`
@@ -95,14 +100,7 @@ const InputFields = styled.div`
     place-items: center;
 
 `
-const Name = styled.input`
-    padding: 15px;
-    border: none;
-    border-radius: 4px;
-    :focus{
-        outline: none;
-    }
-`
+
 
 const First = styled.input`
     margin-top: 15px;
@@ -131,6 +129,7 @@ const SubmitButton = styled.button`
     padding: 10px;
     border: none;
     border-radius: 4px;
+    text-decoration: none;
     :hover{
         background-color: #9390FF;
         color: white;
@@ -143,4 +142,11 @@ const CreateAcount = styled.button`
     color: white;
     border: none;
     margin-top: 50px;
+    
+    p{
+        color: white;
+        background-color: transparent;
+        text-decoration: none;
+    
+    }
 `
