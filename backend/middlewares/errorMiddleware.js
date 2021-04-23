@@ -10,6 +10,8 @@ function isJson(str) {
 
 const errorMiddleware = (err, req, res, next) =>{
 
+
+    console.log(err.name,err.message);
     if(err.name==="ValidationError"){
         let errors = {
             "errors":{}

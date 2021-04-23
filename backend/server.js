@@ -7,6 +7,7 @@ const authMiddleware = require('./middlewares/authMiddleware');
 
 // router imports
 const UserRoute = require('./routes/userRoutes');
+const PatientRoute = require('./routes/patientRoutes');
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/users', UserRoute);
+app.use('/api/patients',PatientRoute);
 
 // Public files
 app.use('/static', express.static(__dirname + '/public'));

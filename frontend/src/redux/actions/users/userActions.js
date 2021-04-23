@@ -22,7 +22,7 @@ const loginUserAction = (email, password) => {
                 },
             };
 
-            const { data } = await axios.post('http://localhost:5000/api/users/login',
+            const { data } = await axios.post('/api/users/login',
                 { email, password },
                 config
             );
@@ -34,7 +34,7 @@ const loginUserAction = (email, password) => {
         } catch (error) {
             dispatch({
                 type: USER_LOGIN_FAIL,
-                payload: error.response && error.response.data.message
+                payload: error.response && error.response.data.errors
             })
         }
     }
