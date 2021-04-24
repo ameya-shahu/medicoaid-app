@@ -1,16 +1,16 @@
 import {
-    USER_LOGIN_FAIL,
-    USER_LOGIN_REQUEST,
-    USER_LOGIN_SUCCESS,
+    USER_REGISTER_FAIL,
+    USER_REGISTER_REQUEST,
+    USER_REGISTER_SUCCESS
 } from "../actionTypes";
 
 import axios from 'axios';
 
-const loginUserAction = (email, password) => {
+const registerUserAction = (resqJson) => {
     return async (dispatch) =>{
         try {
             dispatch({
-                type: USER_LOGIN_REQUEST
+                type: USER_REGISTER_REQUEST
             })
             // call to api
             const config = {
@@ -19,27 +19,23 @@ const loginUserAction = (email, password) => {
                 },
             };
 
-            const { data } = await axios.post('/api/users/login',
-                { email, password },
+            const { data } = await axios.post('/api/users/register',
+                { resqJson },
                 config
             );
 
             dispatch({
-                type: USER_LOGIN_SUCCESS,
+                type: USER_REGISTER_SUCCESS,
                 payload: data  
             });
             
-            //local storage
-            localStorage.setItem('userAuthData', JSON.stringify(data));
-
         } catch (error) {
             dispatch({
-                type: USER_LOGIN_FAIL,
+                type: USER_REGISTER_FAIL,
                 payload: error.response && error.response.data.errors
             })
         }
     }
 }
 
-
-export {loginUserAction};
+export {registerUserAction};

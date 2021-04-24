@@ -2,78 +2,54 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
-import { loginUserAction } from './redux/actions/users/userActions';
 import { useDispatch } from 'react-redux';
+import { registerUserAction } from './redux/actions/users/registerAction';
 
 function Register() {
-    const [name, setName] = useState('');
-    const [department, setDepartment] = useState('');
-    const [male, setMale] = useState('');
-    const [female, setFemale] = useState('');
-    const [number, setNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [street1, setStreet1] = useState('');
-    const [street2, setStreet2] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-
-    const respJson = {
-        name: name,
-        department: department,
-        gender: {
-            male: male,
-            female: female
-        },
-        number: number,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
+    const [state, setState] = useState({
+        name: '',
+        department: null,
+        gender: '',
+        number: null,
+        email: null,
+        password: null,
+        confirmPassword: null,
         address: {
-            street1: street1,
-            street2: street2,
-            city: city,
-            state: state,
-            country: country
+            street1: '',
+            street2: '',
+            city: '',
+            state: '',
+            country: ''
         }
-    }
+    });
 
     const dispatch = useDispatch();
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(loginUserAction(respJson));
+        dispatch(registerUserAction(state));
     }
 
     const handleChange = (e) => {
-        setName(e.target.value);
-        setDepartment(e.target.value);
-        setMale(e.target.value);
-        setFemale(e.target.value);
-        setNumber(e.target.value);
-        setEmail(e.target.value);
-        setStreet1(e.target.value);
-        setStreet2(e.target.value);
-        setCity(e.target.value);
-        setState(e.target.value);
-        setCountry(e.target.value);
-        setPassword(e.target.value);
-        setConfirmPassword(e.target.value);
-
-        
+        const value = e.target.value;
+        setState({
+            ...state,
+            [e.target.name]: value,
+        });
     }
+
     return (
         <Container>
 
             <Headers>
                 <Form onSubmit={(e) => handleSubmit(e)} >
                     <InputFields>
+                
                         <Title1>Doctor Registration</Title1>
                         <FullName
+                            autoComplete='off'
                             type='text'
-                            value={name}
+                            name='name'
+                            value={state.name}
                             placeholder='Enter full name'
                             onChange={handleChange}
                         />
@@ -81,7 +57,7 @@ function Register() {
                         <Department
                             type='text'
                             placeholder='Enter Department name'
-                            value={department}
+                            value={state.department}
                             onChange={handleChange}
                         />
 
@@ -94,7 +70,7 @@ function Register() {
                                         type="radio"
                                         name="gender"
                                         id="exampleRadios1"
-                                        value={male}
+                                        value={state.male}
                                         onChange={handleChange}
                                         />
                                     <label className="form-check-label mr-3" >
@@ -107,7 +83,7 @@ function Register() {
                                         type="radio"
                                         name="gender"
                                         id="exampleRadios2"
-                                        value={female}
+                                        value={state.female}
                                         onChange={handleChange}
                                     />
                                     <label className="form-check-label" >
@@ -121,14 +97,14 @@ function Register() {
                         <PhoneNumber 
                             type='number' 
                             placeholder='Enter phone number'
-                            value={number}
+                            value={state.number}
                             onChange={handleChange}
                         />
 
                         <EmailId 
                             type='email' 
                             placeholder='Enter Email-Id'
-                            value={email}
+                            value={state.email}
                             onChange={handleChange}
                         />
 
@@ -137,31 +113,31 @@ function Register() {
                             <Street1 
                                 type='text' 
                                 placeholder='Street 1' 
-                                value={street1}
+                                value={state.street1}
                                 onChange={handleChange}
                             />
                             <Street2 
                                 type='text' 
                                 placeholder='Street 2' 
-                                value={street2}
+                                value={state.street2}
                                 onChange={handleChange}
                             />
                             <City 
                                 type='text' 
                                 placeholder='City' 
-                                value={city}
+                                value={state.city}
                                 onChange={handleChange}
                             />
                             <State 
                                 type='text' 
                                 placeholder='State' 
-                                value={state}
+                                value={state.state}
                                 onChange={handleChange}
                             />
                             <Street4 
                                 type='text' 
                                 placeholder='Country' 
-                                value={country}
+                                value={state.country}
                                 onChange={handleChange}
                             />
                         </Address>
@@ -169,19 +145,19 @@ function Register() {
                         <Password 
                             type='text' 
                             placeholder='Password' 
-                            value={password} 
+                            value={state.password} 
                             onChange={handleChange}
                         />
                         <ConfirmPassword 
                             type='text' 
                             placeholder='Confirm Password' 
-                            value={confirmPassword}
+                            value={state.confirmPassword}
                             onChange={handleChange}
                         />
-
-                        <Link to='/thankyou'>
+                        <SubmitButton type='submit'>Submit</SubmitButton>
+                        {/* <Link to='/thankyou'>
                             <SubmitButton type='submit'>Submit</SubmitButton>
-                        </Link>
+                        </Link> */}
                     </InputFields>
                 </Form>
 

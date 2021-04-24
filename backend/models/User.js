@@ -36,11 +36,11 @@ const UserSchema = new mongoose.Schema({
         },
         street2: {
             type: String,
-            required: [true, 'address street1 is not present.']
+            required: [true, 'address street2 is not present.']
         },
         city: {
             type: String,
-            required: [true, 'address street1 is not present.']
+            required: [true, 'address city is not present.']
         },
         state: {
             type: String,

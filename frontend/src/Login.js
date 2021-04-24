@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import useFormLogin from './Components/Custom_Hooks/LoginHook';
 import logInvalidate from './Validate';
-
+import 'bulma/css/bulma.css';
 
 const Login = () => {
     //if url is not matching to the initial url then it changes back to the initial
