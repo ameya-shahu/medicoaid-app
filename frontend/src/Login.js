@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
-import { loginUserAction } from './redux/actions/users/userActions'
+
 import { useHistory } from "react-router-dom";
+
+import useFormLogin from './Components/Custom_Hooks/LoginHook';
+import logInvalidate from './Validate';
 
 
 const Login = () => {
@@ -18,61 +20,71 @@ const Login = () => {
         }
     }, []);
 
+   //custom hook called from a diff component
+    const {
+        values,
+        errors,
+        handleChange,
+        handleSubmit,
+    } = useFormLogin(login, logInvalidate);
 
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
+    function login() {
+        console.log('Logged-In successfully!');
+      }
 
-const dispatch = useDispatch();
+    return (
+        <Container>
+            <Headers>
+                <LineOne>LogIn</LineOne>
+                <TagLineOne>now to check</TagLineOne>
+                <Tag>This is a prototype, so don't <br />consider this as the final<br /> aaplication</Tag>
+                <Form onSubmit={handleSubmit} noValidate>
+                    <InputFields>
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(loginUserAction(email, password));
-}
+                        <First
+                            autoComplete='off'
+                            className={`input ${errors.email && 'is-danger'}`}
+                            value={values.email || ''}
+                            placeholder='Email-Id'
+                            type='email'
+                            name='email'
+                            onChange={handleChange}
+                            required
+                        />
+                        {errors.email && (
+                            <p className="help is-danger">{errors.email}</p>
+                        )}
+                        <Second
+                            autoComplete='off'
+                            className={`input ${errors.password && 'is-danger'}`}
+                            value={values.password || ''}
+                            placeholder='Password'
+                            type='password'
+                            name='password'
+                            onChange={handleChange}
+                            required
+                        />
+                        {errors.password && (
+                            <p className="help is-danger">{errors.password}</p>
+                        )}
+                        <SubmitButton type='submit'>Submit</SubmitButton>
 
+                        <CreateAcount>
+                            Don't have an Account?<br /> Create One now...<br />
+                            <Link to='/register'><p>Click here!</p></Link>
+                        </CreateAcount>
+                    </InputFields>
+                </Form>
 
-return (
-    <Container>
-        <Headers>
-            <LineOne>LogIn</LineOne>
-            <TagLineOne>now to check</TagLineOne>
-            <Tag>This is a prototype, so don't <br />consider this as the final<br /> aaplication</Tag>
-            <Form onSubmit={(e) => handleSubmit(e)} >
-                <InputFields>
-
-
-                    <First
-                        value={email}
-                        placeholder='Email-Id'
-                        type='text'
-                        onChange={(e) => setEmail(e.target.value)}
-
-                    />
-
-                    <Second
-                        value={password}
-                        placeholder='Password'
-                        type='password'
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <SubmitButton type='submit'>Submit</SubmitButton>
-
-                    <CreateAcount>
-                        Don't have an Account?<br /> Create One now...<br />
-                        <Link to='/register'><p>Click here!</p></Link>
-                    </CreateAcount>
-                </InputFields>
-            </Form>
-
-        </Headers>
-    </Container>
-)
+            </Headers>
+        </Container>
+    )
 }
 
 export default Login
 
 const Container = styled.div`
-    padding-top: 40px;
+    padding: 40px;
     height: 100vh;
     background-color: #9390FF;
     justify-content: center;
