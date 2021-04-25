@@ -6,7 +6,7 @@ import Footer from './Components/Footer/Footer'
 function Home() {
     return (
         <Container>
-            <Link to='/addPatient'>
+            <Link to='/addpatient'>
                 <AddPatientButton>+ Add more Patients</AddPatientButton>
             </Link>
             <DiseaseDetection>Disease Detection</DiseaseDetection>

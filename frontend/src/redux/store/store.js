@@ -1,7 +1,8 @@
 import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
-import { userReducer, registerReducer } from '../reducers/users/userReducer';
+import { userReducer } from '../reducers/users/userReducer';
+import { registerPatientReducer } from '../reducers/patients/patientReducer';
 
 const Middlewares = [thunk]
 
@@ -10,15 +11,12 @@ const userDatafromStorage = localStorage.getItem('userAuthData') ? JSON.parse(lo
 const initialState = {
     userLogin: {
         userInfo: userDatafromStorage
-    },
-    userRegister: {
-        userInfo: ''
     }
 };
 
 const reducer = combineReducers({
-    userLogin: userReducer, 
-    userRegister: registerReducer
+    userLogin: userReducer,
+    createPatient: registerPatientReducer
 })
 
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...Middlewares)));

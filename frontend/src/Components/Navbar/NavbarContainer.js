@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 
 
 function NavbarContainer() {
-    
+    const user = useSelector(state => state.userLogin.userInfo.name);
+
     const HandleLogout = (e) => {
         e.preventDefault();
         localStorage.removeItem("userAuthData");
@@ -16,7 +18,7 @@ function NavbarContainer() {
     }
     return (
         <Container>
-            <Navbar collapseOnSelect expand="lg" variant="dark">
+            <Navbar className='navbar' collapseOnSelect expand="lg" variant="dark">
                 <Link to='/'>
                     <Navbar.Brand className='bold-text'>MedicoAid</Navbar.Brand>
                 </Link>
@@ -27,7 +29,7 @@ function NavbarContainer() {
                             <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
                             <NavDropdown.Item onClick={(e) => HandleLogout(e)}>Sign Out</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item></NavDropdown.Item>
+                            <NavDropdown.Item>{user}</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
@@ -38,7 +40,4 @@ function NavbarContainer() {
 
 export default NavbarContainer
 
-const Container = styled.div`
-    background-color: #9390FF;
-    color: #9390FF;
-`
+const Container = styled.div``
