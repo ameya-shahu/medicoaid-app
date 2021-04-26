@@ -84,7 +84,7 @@ const Login = () => {
 export default Login
 
 const Container = styled.div`
-    padding: 40px;
+    padding-top: 40px;
     height: 100vh;
     background-color: #9390FF;
     justify-content: center;

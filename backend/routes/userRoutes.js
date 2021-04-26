@@ -19,7 +19,7 @@ UserRoute.post(
         // check if email present in request json or not
 
         const { email } = req.body;
-        // console.log(request.body);
+        console.log(req.body);
         const userExists = await User.findOne({ email: email })
     
         if (userExists) {

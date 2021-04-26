@@ -1,32 +1,48 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { registerUserAction } from './redux/actions/users/registerAction';
 
 function Register() {
     const [state, setState] = useState({
         name: '',
-        department: null,
+        department: '',
         gender: '',
-        number: null,
-        email: null,
-        password: null,
-        confirmPassword: null,
-        address: {
-            street1: '',
-            street2: '',
-            city: '',
-            state: '',
-            country: ''
-        }
+        number: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        street1: '',
+        street2: '',
+        city: '',
+        state: '',
+        country: ''
+
     });
 
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(registerUserAction(state));
+        const address = {
+            street1: state.street1,
+            street2: state.street2,
+            city: state.city,
+            state: state.state,
+            country: state.country
+        }
+        const reqJson = {
+            name: state.name,
+            department: state.department,
+            gender: state.gender,
+            phoneNo: state.number,
+            email: state.email,
+            password: state.password,
+            confirmPassword: state.confirmPassword,
+            address: address
+        }
+        dispatch(registerUserAction(reqJson));
     }
 
     const handleChange = (e) => {
@@ -37,13 +53,15 @@ function Register() {
         });
     }
 
+
+
     return (
         <Container>
 
             <Headers>
                 <Form onSubmit={(e) => handleSubmit(e)} >
                     <InputFields>
-                
+
                         <Title1>Doctor Registration</Title1>
                         <FullName
                             autoComplete='off'
@@ -56,53 +74,59 @@ function Register() {
 
                         <Department
                             type='text'
+                            name='department'
                             placeholder='Enter Department name'
                             value={state.department}
                             onChange={handleChange}
                         />
 
-                        <GenderContainer>
-                            <Title>Gender</Title>
-                            <GenderRadio>
-                                <div className="form-check">
-                                    <input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="gender"
-                                        id="exampleRadios1"
-                                        value={state.male}
-                                        onChange={handleChange}
-                                        />
-                                    <label className="form-check-label mr-3" >
-                                        Male
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <input
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="gender"
-                                        id="exampleRadios2"
-                                        value={state.female}
-                                        onChange={handleChange}
-                                    />
-                                    <label className="form-check-label" >
-                                        Female
-                                    </label>
-                                </div>
+                        <Form.Group>
+                            <Title>
+                                Gender
+                            </Title>
+                            <Col>
+                                <Form.Check
+                                    type="radio"
+                                    name="gender"
+                                    id="gender"
+                                    value='male'
+                                    label='Male'
+                                    onChange={handleChange}
+                                />
 
-                            </GenderRadio>
-                        </GenderContainer>
+                                <Form.Check
+                                    type="radio"
+                                    name="gender"
+                                    id="gender"
+                                    value='female'
+                                    label='Female'
+                                    onChange={handleChange}
+                                />
 
-                        <PhoneNumber 
-                            type='number' 
+                                <Form.Check
+                                    type="radio"
+                                    name="gender"
+                                    id="gender"
+                                    value='Other'
+                                    label='Other'
+                                    onChange={handleChange}
+                                />
+
+                            </Col>
+                        </Form.Group>
+
+
+                        <PhoneNumber
+                            type='text'
+                            name='number'
                             placeholder='Enter phone number'
                             value={state.number}
                             onChange={handleChange}
                         />
 
-                        <EmailId 
-                            type='email' 
+                        <EmailId
+                            type='email'
+                            name='email'
                             placeholder='Enter Email-Id'
                             value={state.email}
                             onChange={handleChange}
@@ -110,47 +134,54 @@ function Register() {
 
                         <Address>
                             <Title>Address</Title>
-                            <Street1 
-                                type='text' 
-                                placeholder='Street 1' 
+                            <Street1
+                                type='text'
+                                name='street1'
+                                placeholder='Street 1'
                                 value={state.street1}
                                 onChange={handleChange}
                             />
-                            <Street2 
-                                type='text' 
-                                placeholder='Street 2' 
+                            <Street2
+                                type='text'
+                                name='street2'
+                                placeholder='Street 2'
                                 value={state.street2}
                                 onChange={handleChange}
                             />
-                            <City 
-                                type='text' 
-                                placeholder='City' 
+                            <City
+                                type='text'
+                                name='city'
+                                placeholder='City'
                                 value={state.city}
                                 onChange={handleChange}
                             />
-                            <State 
-                                type='text' 
-                                placeholder='State' 
+                            <State
+                                type='text'
+                                name='state'
+                                placeholder='State'
                                 value={state.state}
                                 onChange={handleChange}
                             />
-                            <Street4 
-                                type='text' 
-                                placeholder='Country' 
+                            <Street4
+                                type='text'
+                                name='country'
+                                placeholder='Country'
                                 value={state.country}
                                 onChange={handleChange}
                             />
                         </Address>
 
-                        <Password 
-                            type='text' 
-                            placeholder='Password' 
-                            value={state.password} 
+                        <Password
+                            type='text'
+                            name='password'
+                            placeholder='Password'
+                            value={state.password}
                             onChange={handleChange}
                         />
-                        <ConfirmPassword 
-                            type='text' 
-                            placeholder='Confirm Password' 
+                        <ConfirmPassword
+                            type='text'
+                            name='confirmPassword'
+                            placeholder='Confirm Password'
                             value={state.confirmPassword}
                             onChange={handleChange}
                         />
@@ -213,15 +244,7 @@ const Department = styled.input`
     border-radius: 4px;
     :focus{
         outline: none;
-    }
-`
-const GenderContainer = styled.div`
-   margin-top: 15px;
-`
-const GenderRadio = styled.div`
-    display: flex;
-    flew-flow: column;
-    
+    }  
 `
 const PhoneNumber = styled.input`
     margin-top: 15px;
