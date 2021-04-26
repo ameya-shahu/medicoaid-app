@@ -50,7 +50,7 @@ UserRoute.post(
 
         if (user) {
             /** If user exists match password */
-            if (user.isPasswordMatch(password)) {
+            if ( await user.isPasswordMatch(password)) {
                 res.status(200)
                     .json({
                         "id": user._id,

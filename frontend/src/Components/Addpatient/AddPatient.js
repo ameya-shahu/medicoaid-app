@@ -9,15 +9,6 @@ import { registerPatientAction } from '../../redux/actions/patients/registerPati
 import { useHistory } from "react-router-dom";  
 
 function ThankYou() {
-    //if url is not matching to the initial url then it changes back to the initial
-    // const URL = window.location.href;
-    // var res = URL.split("/");
-    // const history = useHistory();
-    // useEffect(() => {
-    //     if (res.length > 1) {
-    //         history.push('/');
-    //     }
-    // }, []);
 
     const [startDate, setStartDate] = useState(new Date());
     const [state, setState] = useState({

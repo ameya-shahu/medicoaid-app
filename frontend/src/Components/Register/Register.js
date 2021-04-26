@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Form, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { registerUserAction } from './redux/actions/users/registerAction';
+import { registerUserAction } from '../../redux/actions/users/registerAction';
 
 function Register() {
     const [state, setState] = useState({

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Footer from './Components/Footer/Footer'
+import Footer from '../Footer/Footer'
 
 function Home() {
     return (
@@ -10,7 +10,9 @@ function Home() {
                 <AddPatientButton>+ Add more Patients</AddPatientButton>
             </Link>
             <DiseaseDetection>Disease Detection</DiseaseDetection>
-            <PatientDetection>Patients Details</PatientDetection>
+            <Link to='/patientslist'>
+                <PatientDetection>Patients Monitoring</PatientDetection>
+            </Link>
             <Footer />
         </Container>
     )
@@ -63,6 +65,7 @@ const PatientDetection = styled.div`
     display: grid;
     color: #9390FF;
     background-color: white;
+    text-decoration: none;
     font-size: 20px;
     font-weight: 600;
     place-items: center;

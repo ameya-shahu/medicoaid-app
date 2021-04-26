@@ -21,7 +21,8 @@ const registerPatientAction = (reqJson) => {
 
             dispatch({
                 type: PATIENT_REGISTER_SUCCESS,
-                payload: data  
+                payload: data,
+                 
             });
 
         } catch (error) {
