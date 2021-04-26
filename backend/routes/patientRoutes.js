@@ -57,4 +57,40 @@ PatientRoute.get(
         }
     })
 )
+
+/* update patient details */
+
+PatientRoute.put(
+    '/:id',
+    expressAsyncHandler(async (req, res) => {
+        //console.log("route hit")
+        /** check incase of email updation that if another patient already exist with same email id or not */
+
+        const { email } = req.body;
+        const patient = await Patient.findOne({ email: email }) // find user by email id
+
+        /**if there is no patient with same email or id in request is same as that of found patient then update else throw error */
+        if (!patient || patient._id === req.params.id) {
+            const updatedPatient = await Patient.findByIdAndUpdate(
+                req.params.id,
+                req.body,
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+            console.log(updatedPatient)
+            res.json({
+                "id": updatedPatient._id,
+                "name": updatedPatient.name,
+                "email": updatedPatient.email,
+                "phoneNo": updatedPatient.phoneNo,
+                "gender": updatedPatient.gender,
+            })
+        } else {
+            throw new Error(JSON.stringify({ "email": "Cannot update email as patient already exist with same email." }))
+        }
+    })
+)
+
 module.exports = PatientRoute;

@@ -50,7 +50,7 @@ UserRoute.post(
 
         if (user) {
             /** If user exists match password */
-            if (user.isPasswordMatch) {
+            if (user.isPasswordMatch(password)) {
                 res.status(200)
                     .json({
                         "id": user._id,
@@ -105,9 +105,6 @@ UserRoute.put(
         } else {
             throw new Error(JSON.stringify({ "email": "Cannot update email as user already exist with same email." }))
         }
-
-
-
     })
 )
 
