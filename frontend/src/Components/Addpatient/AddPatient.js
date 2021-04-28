@@ -6,9 +6,33 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from 'react-redux';
 import { registerPatientAction } from '../../redux/actions/patients/registerPatientAction';
-import { useHistory } from "react-router-dom";  
+import { useHistory } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {makeStyles} from "@material-ui/core/styles";
+
+
 
 function ThankYou() {
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            '& > *': {
+                margin: theme.spacing(1),
+                width: '30ch',
+            },
+        },
+        formField:{
+            width: '30ch',
+        }
+    }));
+
+    const classes = useStyles();
 
     const [startDate, setStartDate] = useState(new Date());
     const [state, setState] = useState({
@@ -40,72 +64,79 @@ function ThankYou() {
     return (
         <Container>
             <Content>
-                <Form onSubmit={(e) => handleSubmit(e)}>
-                    <Form.Group>
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control name='email' value={state.email} type="email" placeholder="name@example.com" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control name='name' value={state.name} type="text" placeholder="Enter Name" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group >
-                        <Form.Label>Phone</Form.Label>
-                        <Form.Control name='phoneNo' value={state.phoneNo} type="text" placeholder="XXXXXXXXXXXX" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>
-                            Gender
-                        </Form.Label>
-                        <Col>
-                            <Form.Check
-                                type="radio"
-                                label="Female"
-                                name="gender"
-                                id="gender"
-                                value='female'
-                                onChange={handleChange}
-                            />
-                            <Form.Check
-                                type="radio"
-                                label="Male"
-                                name="gender"
-                                id="gender"
-                                value='male'
-                                onChange={handleChange}
-                            />
-                            <Form.Check
-                                type="radio"
-                                label="Other"
-                                name="gender"
-                                id="gender"
-                                value='other'
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>
-                            Date of Birth
-                        </Form.Label>
-                        <Col>
-                            <DatePicker
-                                name='dateOfBirth'
-                                onChange={handleChange}
-                                value={state.dateOfBirth}
-                                dateFormat="dd/MM/yyyy"
-                                selected={startDate}
-                                onChange={date => setStartDate(date)}
-                                isClearable
-                                placeholderText="Enter DOB"
-                                closeOnScroll={true}
-                            />
-                        </Col>
+                <Card className={classes.root}>
+                    <Form onSubmit={ handleSubmit }>
+                        <TextField
+                            label="Email"
+                            autoComplete='off'
+                            className={classes.formField}
+                            value={state.email}
+                            placeholder='abc@xyz.com'
+                            type='email'
+                            name='email'
+                            onChange={handleChange}
+                            required
+                        />
 
-                    </Form.Group>
-                    <SubmitButton type='submit'>Submit</SubmitButton>
-                </Form>
+                        <TextField
+                            label="Name"
+                            autoComplete='off'
+                            className={classes.formField}
+                            value={state.name}
+                            placeholder='Enter Name'
+                            type='text'
+                            name='name'
+                            onChange={handleChange}
+                            required
+                        />
 
+                        <TextField
+                            label = "Phone Number"
+                            autoComplete="off"
+                            name='phoneNo'
+                            value={state.phoneNo}
+                            className={classes.formField}
+                            type="text"
+                            placeholder="XXXXXXXXXXXX"
+                            onChange={handleChange}
+                            required
+                        />
+
+                        <FormControl className= 'mt-4'>
+                            <FormLabel component="legend">Gender</FormLabel>
+                            <RadioGroup aria-label="gender" name="gender"  value={state.gender} onChange={handleChange}>
+                                <FormControlLabel value="female" control={<Radio color = "primary" />} label="Female" />
+                                <FormControlLabel value="male" control={<Radio color = "primary" />} label="Male" />
+                                <FormControlLabel value="other" control={<Radio color = "primary" />} label="Other" />
+                            </RadioGroup>
+                        </FormControl>
+
+                        <Form.Group>
+                            <Form.Label>
+                                Date of Birth
+                            </Form.Label>
+                            <Col>
+                                <DatePicker
+                                    name='dateOfBirth'
+                                    onChange={handleChange}
+                                    value={state.dateOfBirth}
+                                    dateFormat="dd/MM/yyyy"
+                                    selected={startDate}
+                                    onChange={date => setStartDate(date)}
+                                    isClearable
+                                    placeholderText="Enter DOB"
+                                    closeOnScroll={true}
+                                />
+                            </Col>
+
+                        </Form.Group>
+
+
+                        <Wrapper>
+                            <SubmitButton type='submit'>Submit</SubmitButton>
+                        </Wrapper>
+                    </Form>
+                </Card>
             </Content>
         </Container>
     )
@@ -124,6 +155,11 @@ const Content = styled.div`
     display: grid;
     place-items: center;    
 `
+
+const Wrapper = styled.div`
+text-align: center;
+`
+
 const SubmitButton = styled.button`
     margin-top: 25px;
     width: 100px;

@@ -49,9 +49,9 @@ const Login = () => {
     return (
         <Container>
             <Headers>
-                <LineOne>LogIn</LineOne>
-                <TagLineOne>now to check</TagLineOne>
-                <Tag>This is a prototype, so don't <br />consider this as the final<br /> aaplication</Tag>
+                <LineOne>LOGIN</LineOne>
+                <TagLineOne>Now to proceed further</TagLineOne>
+                <Tag>MedicoAId<br />Need insights on medical images<br /> or monitor your patient</Tag>
 
                 <Form onSubmit={handleSubmit} noValidate>
                     <Card>
