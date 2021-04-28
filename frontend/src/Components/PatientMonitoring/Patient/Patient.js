@@ -17,26 +17,15 @@ const useStyles = makeStyles({
 
 });
 
-export default function Patient() {
+export default function Patient({data}) {
     const classes = useStyles();
     return (
         <Container>
             <Card className={classes.root}>
                 <CardContent>
                     <CardHeader
-                        title="Ameya Shahu"
-                        subheader="September 14, 2016"
-                    />
-                </CardContent>
-                <CardActions>
-                    <Button size="small" variant='contained' color='primary'>More</Button>
-                </CardActions>
-            </Card>
-            <Card className={classes.root}>
-                <CardContent>
-                    <CardHeader
-                        title="Ameya Shahu"
-                        subheader="September 14, 2016"
+                        title={data.name}
+                        subheader={data.gender}
                     />
                 </CardContent>
                 <CardActions>

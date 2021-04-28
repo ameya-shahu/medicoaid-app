@@ -13,7 +13,7 @@ const registerPatientAction = (reqJson) => {
                     "content-Type": "application/json",
                 },
             };
-            console.log(reqJson);
+    
             const { data } = await axios.post('/api/patients/register',
                 reqJson,
                 config

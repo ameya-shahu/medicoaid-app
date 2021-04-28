@@ -20,7 +20,7 @@ function NavbarContainer() {
         <Container>
             <Navbar className='navbar' collapseOnSelect expand="lg" variant="dark">
                 <Link to='/'>
-                    <Navbar.Brand className='bold-text'>MedicoAid</Navbar.Brand>
+                    <Navbar.Brand className='bold-text'>MedicoAId</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
