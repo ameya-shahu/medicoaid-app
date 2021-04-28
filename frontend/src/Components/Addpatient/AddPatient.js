@@ -133,6 +133,9 @@ function ThankYou() {
 
 
                         <Wrapper>
+                            <Link to='/'>
+                                <SubmitButton className='mr-3' type='submit'>Home</SubmitButton>
+                            </Link>
                             <SubmitButton type='submit'>Submit</SubmitButton>
                         </Wrapper>
                     </Form>

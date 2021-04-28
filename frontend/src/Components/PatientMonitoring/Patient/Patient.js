@@ -29,7 +29,7 @@ export default function Patient({data}) {
                     />
                 </CardContent>
                 <CardActions>
-                    <Button size="small" variant='contained' color='primary'>More</Button>
+                    <Button size="medium" variant='contained' color='primary'>More</Button>
                 </CardActions>
             </Card>
         </Container>
