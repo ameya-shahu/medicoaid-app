@@ -8,11 +8,13 @@ import Register from './Components/Register/Register';
 import AddPatient from './Components/Addpatient/AddPatient';
 import { useSelector } from 'react-redux';
 import NavbarContainer from './Components/Navbar/NavbarContainer';
-import PatientsList from './Components/PatientMonitoring/PatientsList';
+import PatientsList from './Components/PatientMonitoring/PatientsList/PatientsList';
+import PatientDetails from './Components/PatientMonitoring/PatientDetails/PatientDetails'
 
 const App = () => {
 
   const userInfo = useSelector(state => state.userLogin.userInfo);
+  
 
   return (
     <Router>
@@ -32,6 +34,7 @@ const App = () => {
               <Switch>
                 <Route path='/addPatient' component={AddPatient} />
                 <Route path='/patientslist' component={PatientsList} />
+                <Route path='/patientdetails' component={PatientDetails} />
                 <Route path="/" component={Home} />
                 
               </Switch>

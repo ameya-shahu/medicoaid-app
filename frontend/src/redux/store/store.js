@@ -4,6 +4,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import { userReducer } from '../reducers/users/userReducer';
 import { registerPatientReducer } from '../reducers/patients/patientReducer';
 import {patientListReducer} from '../reducers/patients/patientListReducer'
+import { patientDetailsReducer } from '../reducers/patients/patientDetailsReducer';
 
 const Middlewares = [thunk]
 
@@ -18,7 +19,8 @@ const initialState = {
 const reducer = combineReducers({
     userLogin: userReducer,
     createPatient: registerPatientReducer,
-    patientList: patientListReducer
+    patientList: patientListReducer,
+    patientDetail: patientDetailsReducer
 })
 
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...Middlewares)));

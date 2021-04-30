@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Patient from '../PatientMonitoring/Patient/Patient';
+import Patient from '../../PatientMonitoring/Patient/Patient';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
-import { patientListAction } from '../../redux/actions/patients/patientListAction';
+import { patientListAction } from '../../../redux/actions/patients/patientListAction';
 import {Spinner} from 'react-bootstrap';
 
 function PatientsList() {

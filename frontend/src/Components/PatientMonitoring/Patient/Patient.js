@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import { CardHeader } from '@material-ui/core';
 
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 
 export default function Patient({data}) {
     const classes = useStyles();
+    const URL = '/patientdetails?id=' + data._id;
     return (
         <Container>
             <Card className={classes.root}>
@@ -29,7 +31,15 @@ export default function Patient({data}) {
                     />
                 </CardContent>
                 <CardActions>
-                    <Button size="medium" variant='contained' color='primary'>More</Button>
+                    <Link to={URL}>
+                        <Button 
+                            size="medium" 
+                            variant='contained' 
+                            color='primary'
+                        >
+                            More
+                        </Button>
+                    </Link>
                 </CardActions>
             </Card>
         </Container>
@@ -38,3 +48,7 @@ export default function Patient({data}) {
 }
 
 const Container = styled.div``
+const MoreButton = styled.input`
+    background: black;
+    color: white;
+`
