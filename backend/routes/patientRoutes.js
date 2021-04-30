@@ -57,7 +57,27 @@ PatientRoute.get(
         }
     })
 )
+PatientRoute.get(
+    '/:id',
+    expressAsyncHandler(async (req,res)=>{
+        const id = req.params.id;
+        try{
+            const patient = await Patient.findOne({_id:id})
+            if(patient){
+                res.json(patient);
+            }else{
+                res.status(404);
+                throw new Error(JSON.stringify({"patient": "No patient with given id"}))
+            }
+        }catch (error){
+            console.log("patient Detail Route -- ",500,error.message)
+            res.status(404)
+            throw new Error(JSON.stringify({"patient": "No patient with given id"}));
+        }
 
+
+    })
+)
 /* update patient details */
 
 PatientRoute.put(
