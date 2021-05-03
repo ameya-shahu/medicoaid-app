@@ -27,15 +27,23 @@ const PatientSchema = new mongoose.Schema({
     },
     treatment: {
         type: Array,
+    },
+    sensorMachine: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SensorMachine'
     }
 });
 
-PatientSchema.methods.getAge = function(){
-    let ageDifMs = (Date.now() - this.dateOfBirth.getTime());
+PatientSchema.virtual('age').get(function () {
+    let temp = new Date(this.dateOfBirth)
+    let ageDifMs = (Date.now() - temp.getTime());
     let ageDate = new Date(ageDifMs);
-    let age = Math.abs(ageDate.getUTCFullYear() - 1970);
-    return age;
-}
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+})
+
+// PatientSchema.methods.getAge = function(){
+//
+// }
 
 const Patient = mongoose.model("Patient",PatientSchema);
 

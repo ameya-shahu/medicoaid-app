@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
+
+
 const dbConnect = ()=>{
+    mongoose.set('toJSON', { virtuals: true });
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify:false,
         useUnifiedTopology:true,

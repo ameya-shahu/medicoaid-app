@@ -27,7 +27,7 @@ PatientRoute.post(
             email: patient.email,
             phoneNo: patient.phoneNo,
             gender: patient.gender,
-            age: patient.getAge()
+            age: patient.age
         })
     })
 );
@@ -46,7 +46,8 @@ PatientRoute.get(
             .sort({name:1})
             .limit(limit)
             .skip(skipIndex)
-            .select(['name', 'gender']);
+            .select(['name', 'gender', 'age'])
+            .exec();
 
         if (patientList.length>0){
             res.status(200);
@@ -74,8 +75,6 @@ PatientRoute.get(
             res.status(404)
             throw new Error(JSON.stringify({"patient": "No patient with given id"}));
         }
-
-
     })
 )
 /* update patient details */
