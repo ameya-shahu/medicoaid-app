@@ -5,6 +5,7 @@ import { userReducer } from '../reducers/users/userReducer';
 import { registerPatientReducer } from '../reducers/patients/patientReducer';
 import {patientListReducer} from '../reducers/patients/patientListReducer'
 import { patientDetailsReducer } from '../reducers/patients/patientDetailsReducer';
+import { firebasePatientReducer } from '../reducers/patients/firebasePatientReducer'
 
 const Middlewares = [thunk]
 
@@ -20,8 +21,11 @@ const reducer = combineReducers({
     userLogin: userReducer,
     createPatient: registerPatientReducer,
     patientList: patientListReducer,
-    patientDetail: patientDetailsReducer
+    patientDetail: patientDetailsReducer,
+    firebase: firebasePatientReducer
 })
+
+
 
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...Middlewares)));
 
