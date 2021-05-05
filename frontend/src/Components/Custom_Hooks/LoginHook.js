@@ -12,7 +12,7 @@ const useFormLogin = (callback, validate) => {
         if (Object.keys(errors).length === 0 && isSubmitting) {
             callback();
         }
-    }, [errors]);
+    }, [errors, isSubmitting, callback]);
 
     const handleSubmit = (event) => {
         if (event) { 

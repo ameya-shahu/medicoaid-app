@@ -3,20 +3,19 @@ import { Line } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 
 
-const MultiAxisLine = () => {
+const PatientChart = () => {
   var [updatespo2, setUpdatespo2] = useState([]);
   var [updatepulse, setUpdatepulse] = useState([]);
-  const {details, loading} = useSelector(state => state.firebase)
+  const {details} = useSelector(state => state.firebase)
   useEffect(() => {
     
-    console.log(details);
+    // console.log(details);
     if( details && details.type === 's'){
       setUpdatespo2 ( details.data);
     }
     else if (details && details.type === 'p') {
       setUpdatepulse(details.data);
     }  
-    
   }, [setUpdatespo2, setUpdatepulse, details])
   
   const chartData1 = {
@@ -66,7 +65,7 @@ const MultiAxisLine = () => {
 
 };
 
-export default MultiAxisLine;
+export default PatientChart
 
 
 

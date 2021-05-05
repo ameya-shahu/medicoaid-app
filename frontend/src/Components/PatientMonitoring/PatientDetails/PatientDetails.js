@@ -5,7 +5,7 @@ import queryString from 'query-string'
 import { patientDetailsAction } from '../../../redux/actions/patients/patientDetailsAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
-import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
+import { Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import PatientChart from '../PatientChart/PatientChart';
 
 import firebase from '../../Firebase/Firebase';
@@ -28,32 +28,37 @@ function PatientDetails() {
 
     //dispatching patient details action
     const dispatch = useDispatch();
+
+    const { details, loading } = useSelector(state => state.patientDetail);
+    
     useEffect(() => {
         dispatch(patientDetailsAction(id));
-    }, [dispatch]);
-    const { details, loading } = useSelector(state => state.patientDetail);
 
-    //updating data from firebase and 
-    //dispatching firebase action for 
-    //pulserate and spo2
-    firebase.database().ref("sensor/SpO2").limitToLast(6).on("value", datasnap => {
-        let newData = [];
-        datasnap.forEach(snap => {
-            newData.push(parseInt(snap.val()));
+        //updating data from firebase and 
+        //dispatching firebase action for 
+        //pulserate and spo2
+        firebase.database().ref("sensor/SpO2").limitToLast(6).on("value", datasnap => {
+            let newData = [];
+            datasnap.forEach(snap => {
+                newData.push(parseInt(snap.val()));
+            });
+
+            dispatch(firebasePatientAction(newData, "s"));
+            //   console.log(newData)
+        });
+        firebase.database().ref("sensor/heartRate").limitToLast(6).on("value", datasnap => {
+            let newData = [];
+            datasnap.forEach(snap => {
+                newData.push(parseInt(snap.val()));
+            });
+
+            dispatch(firebasePatientAction(newData, "p"));
+            //   console.log(newData)
         });
 
-        dispatch(firebasePatientAction(newData, "s"));
-        //   console.log(newData)
-    });
-    firebase.database().ref("sensor/heartRate").limitToLast(6).on("value", datasnap => {
-        let newData = [];
-        datasnap.forEach(snap => {
-            newData.push(parseInt(snap.val()));
-        });
+    }, [dispatch, id]);
 
-        dispatch(firebasePatientAction(newData, "p"));
-        //   console.log(newData)
-    });
+
 
     return (
         <Container>

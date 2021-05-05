@@ -32,7 +32,7 @@ const Login = () => {
         if (res.length > 1) {
             history.push('/');
         }
-    }, []);
+    }, [history, res.length]);
 
     //custom hook called from a diff component
     const {
@@ -131,26 +131,6 @@ const InputFields = styled.div`
 
 `
 
-
-const First = styled.input`
-    margin-top: 15px;
-    padding: 15px;
-    border: none;
-    border-radius: 4px;
-    :focus{
-        outline: none;
-    }
-`
-
-const Second = styled.input`
-    margin-top: 15px;
-    padding: 15px;
-    border: none;
-    border-radius: 4px;
-    :focus{
-        outline: none;
-    }
-`
 const SubmitButton = styled.button`
     margin-top: 15px;
     width: 100px;

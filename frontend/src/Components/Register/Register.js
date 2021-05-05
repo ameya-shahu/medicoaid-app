@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Form, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { registerUserAction } from '../../redux/actions/users/registerAction';

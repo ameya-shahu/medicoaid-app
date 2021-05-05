@@ -1,67 +1,109 @@
-import React from 'react'
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
-import styled from 'styled-components'
-import { Navbar, Nav } from 'react-bootstrap'
-import './Navbar.css'
+import Menu from '@material-ui/core/Menu';
+
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import PersonIcon from '@material-ui/icons/Person';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Box } from '@material-ui/core';
 
-function NavbarContainer() {
-    const user = useSelector(state => state.userLogin.userInfo);
 
-    const HandleLogout = (e) => {
-        e.preventDefault();
-        localStorage.removeItem("userAuthData");
-        window.location.href = "/";
-        window.location.reload();
-    }
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    return (
-        <Container>
-            <Navbar className='navbar' collapseOnSelect expand="lg" variant="dark">
-                <Link to='/'>
-                    <Navbar.Brand className='bold-text'>MedicoAId</Navbar.Brand>
-                </Link>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ml-auto mr-5">
-                        <div>
-                            <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
-                                <p className='openMenu'>Open Menu</p>
-                            </Button>
-                            <Menu
-                                id="fade-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Doctor: {user.name}</MenuItem>
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={(e) => HandleLogout(e)}>Logout</MenuItem>
-                            </Menu>
-                        </div>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        </Container>
-    )
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+
+  title: {
+    flexGrow: 1,
+    color: 'white',
+    textDecoration: 'none',
+    marginRight: 'auto'
+  },
+  title1: {
+    flexGrow: 1,
+    color: 'black',
+    textDecoration: 'none',
+    padding: '0'
+  },
+}));
+
+export default function NavbarContainer({userInfo}) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const HandleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("userAuthData");
+    window.location.href = "/";
+    window.location.reload();
+  }
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" style={{ background: '#9390FF' }}>
+        <Toolbar>
+            <Typography variant="h5" className={classes.title}>
+                MedicoAId
+            </Typography>
+          
+            <div>
+              <IconButton
+                id='fade-menu'
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Link to='/profile'>
+                        <p className={classes.title1}>Profile</p>
+                    </Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                    <Link to='/'>
+                        <p className={classes.title1}>Home</p>
+                    </Link>
+                </MenuItem>
+                <MenuItem onClick={(e) => HandleLogout(e) }>Logout</MenuItem>
+              </Menu>
+            </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
-
-export default NavbarContainer
-
-const Container = styled.div``

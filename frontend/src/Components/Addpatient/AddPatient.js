@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Form, Row, Col } from 'react-bootstrap'
+import { Form, Col } from 'react-bootstrap'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch } from 'react-redux';
 import { registerPatientAction } from '../../redux/actions/patients/registerPatientAction';
-import { useHistory } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";

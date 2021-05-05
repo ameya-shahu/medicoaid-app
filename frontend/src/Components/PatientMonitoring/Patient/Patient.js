@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -47,8 +47,7 @@ export default function Patient({data}) {
     );
 }
 
-const Container = styled.div``
-const MoreButton = styled.input`
+const Container = styled.div`
     background: black;
     color: white;
 `

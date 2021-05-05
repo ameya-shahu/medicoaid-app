@@ -1,7 +1,7 @@
+import { Divider } from '@material-ui/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Footer from '../Footer/Footer'
 
 function Home() {
     return (
@@ -13,7 +13,11 @@ function Home() {
             <Link to='/patientslist'>
                 <PatientDetection>Patients Monitoring</PatientDetection>
             </Link>
-            <Footer />
+            <Divider variant='middle' width={300} className='mt-5' />
+            <FooterContainer>
+                Copyright @MedicoAid 2021
+            </FooterContainer>
+
         </Container>
     )
 }
@@ -76,4 +80,8 @@ const PatientDetection = styled.div`
         color: white;
         border: 2px solid white; 
     }
+`
+
+const FooterContainer = styled.div`
+    color: #9390FF
 `
