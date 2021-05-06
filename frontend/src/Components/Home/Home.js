@@ -13,6 +13,10 @@ function Home() {
             <Link to='/patientslist'>
                 <PatientDetection>Patients Monitoring</PatientDetection>
             </Link>
+            <Link to='/allocatemachine'>
+                <AllocateMachine>Allocate Machine</AllocateMachine>
+            </Link>
+            
             <Divider variant='middle' width={300} className='mt-5' />
             <FooterContainer>
                 Copyright @MedicoAid 2021
@@ -29,11 +33,12 @@ const Container = styled.div`
     place-items: center;
     flex-direction: coloumn;
     padding: 10px;
-    height: 80vh;
+
 `
 const AddPatientButton = styled.button`
     width: 300px;
     padding: 6px;
+    margin-top: 15px;
     font-size: 20px;
     font-weight: 600;
     background-color: #9390FF;
@@ -49,6 +54,7 @@ const AddPatientButton = styled.button`
 const DiseaseDetection = styled.button`
     width: 300px;
     height: 160px;
+    margin-top: 15px;
     display: grid;
     color: #9390FF;
     background-color: white;
@@ -66,6 +72,7 @@ const DiseaseDetection = styled.button`
 const PatientDetection = styled.div`
     width: 300px;
     height: 160px;
+    margin-top: 15px;
     display: grid;
     color: #9390FF;
     background-color: white;
@@ -79,6 +86,23 @@ const PatientDetection = styled.div`
         background-color: #9390FF;
         color: white;
         border: 2px solid white; 
+    }
+`
+
+const AllocateMachine = styled.button`
+    width: 300px;
+    padding: 6px;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #9390FF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    :hover{
+        background-color: white;
+        color: #9390FF;
+        border: 2px solid #9390FF;
     }
 `
 

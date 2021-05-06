@@ -5,7 +5,8 @@ import { userReducer } from '../reducers/users/userReducer';
 import { registerPatientReducer } from '../reducers/patients/patientReducer';
 import {patientListReducer} from '../reducers/patients/patientListReducer'
 import { patientDetailsReducer } from '../reducers/patients/patientDetailsReducer';
-import { firebasePatientReducer } from '../reducers/patients/firebasePatientReducer'
+import { firebasePatientReducer } from '../reducers/patients/firebasePatientReducer';
+import { sensorMachineReducer } from '../reducers/sensorMachine/sensorMachineReducer';
 
 const Middlewares = [thunk]
 
@@ -22,7 +23,8 @@ const reducer = combineReducers({
     createPatient: registerPatientReducer,
     patientList: patientListReducer,
     patientDetail: patientDetailsReducer,
-    firebase: firebasePatientReducer
+    firebase: firebasePatientReducer,
+    sensorMachine : sensorMachineReducer
 })
 
 
