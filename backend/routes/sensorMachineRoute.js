@@ -44,6 +44,7 @@ SensorMachineRoute.put(
         }catch (e) {
             res.status(400);
             console.log(e);
+            throw new Error(JSON.stringify({"sensorMachine": "Something went wrong"}))
         }
 
     })
