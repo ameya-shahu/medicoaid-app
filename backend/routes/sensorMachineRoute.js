@@ -23,22 +23,27 @@ SensorMachineRoute.post(
 SensorMachineRoute.put(
     '/allocateMachine',
     expressAsyncHandler(async (req, res)=>{
-        const {machineCode, authCode, identifyName, userId } = req.body;
+        try{
+            const {machineCode, authCode, identifyName, userId } = req.body;
 
-        const machine = await SensorMachine.findOne({machineCode:machineCode});
+            const machine = await SensorMachine.findOne({machineCode:machineCode});
 
-        if(! machine){
-            throw new Error(JSON.stringify({"sensorMachine": "Machine not exist with given machine code. contact customer care"}))
-        }else{
-            if(await machine.isAuthCodeMatch(authCode)){
-                const update = {
-                    identifyName: identifyName,
-                    allocatedTo: userId
+            if(! machine){
+                throw new Error(JSON.stringify({"sensorMachine": "Machine not exist with given machine code. contact customer care"}))
+            }else{
+                if(await machine.isAuthCodeMatch(authCode)){
+                    const update = {
+                        identifyName: identifyName,
+                        allocatedTo: userId
+                    }
+                    const filter = {machineCode: machineCode};
+                    let machine = await SensorMachine.findOneAndUpdate(filter, update,{new: true});
+                    res.json(machine);
                 }
-                const filter = {machineCode: machineCode};
-                let machine = await SensorMachine.findOneAndUpdate(filter, update,{new: true});
-                res.json(machine);
             }
+        }catch (e) {
+            res.status(400);
+            console.log(e);
         }
 
     })
