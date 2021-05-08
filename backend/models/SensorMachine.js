@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs')
 
 
 const SensorMachineSchema = new mongoose.Schema({
@@ -23,7 +24,7 @@ const SensorMachineSchema = new mongoose.Schema({
     inUse: {
         type: Boolean
     }
-})
+});
 
 SensorMachineSchema.pre('save', async function(next){
     const salt = await bcrypt.genSalt();

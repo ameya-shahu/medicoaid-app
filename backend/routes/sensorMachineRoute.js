@@ -1,16 +1,16 @@
 const expressAsyncHandler = require("express-async-handler");
 const express = require("express");
-const SensorMachine = require("styled-components");
+const SensorMachine = require("../models/SensorMachine");
 
 
 let SensorMachineRoute = express.Router()
 
 
 SensorMachineRoute.post(
-    '/newMachine',
+    '/newmachine',
     expressAsyncHandler(async (req, res)=>{
         const { machineCode } = req.body
-        const existMachine = await SensorMachine.find({machineCode: machineCode});
+        const existMachine = await SensorMachine.findOne({ machineCode: machineCode })
         if(existMachine){
             throw new Error(JSON.stringify({"sensorMachine": "Machine already exist with given machineCode"}))
         }else{
@@ -20,7 +20,7 @@ SensorMachineRoute.post(
     })
 )
 
-SensorMachine.put(
+SensorMachineRoute.put(
     '/allocateMachine',
     expressAsyncHandler(async (req, res)=>{
         const {machineCode, authCode, identifyName, userId } = req.body;
@@ -43,3 +43,5 @@ SensorMachine.put(
 
     })
 )
+
+module.exports = SensorMachineRoute;
