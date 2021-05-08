@@ -35,17 +35,19 @@ const useStyles = makeStyles({
     }
 });
 
-export default function RegisterMachine() {
+export default function AllocateMachine() {
     const classes = useStyles();
     const [value, setValue] = useState({
         machineCode: '',
         authCode: ''
     })
-    
+    // console.log(value)    
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(initiateMachineAction(value));
+
+        dispatch(initiateMachineAction(value, 'r'));
+
     }
 
     const handleChange = (e) => {
@@ -92,7 +94,7 @@ export default function RegisterMachine() {
                         </CardContent>
                         <Divider variant='middle' />
                         <CardActions className={classes.center}>
-                            <Button size="medium" color='primary' variant='outlined'>Register</Button>
+                            <Button size="medium" type='submit' color='primary' variant='outlined'>Register</Button>
                         </CardActions>
                     </Card>
                 </Form>
@@ -114,3 +116,4 @@ const Content = styled.div`
     display: grid;
     place-items: center;
 `
+

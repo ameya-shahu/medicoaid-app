@@ -13,13 +13,13 @@ function Home() {
             <Link to='/patientslist'>
                 <PatientDetection>Patients Monitoring</PatientDetection>
             </Link>
-            <Link to='/allocatemachine'>
-                <AllocateMachine>Allocate Machine</AllocateMachine>
+            <Link to='/registerMachine'>
+                <RegisterMachine>Register your Machine</RegisterMachine>
             </Link>
             
             <Divider variant='middle' width={300} className='mt-5' />
-            <FooterContainer>
-                Copyright @MedicoAid 2021
+            <FooterContainer className='mt-3'>
+                Copyright @MedicoAId 2021
             </FooterContainer>
 
         </Container>
@@ -69,27 +69,24 @@ const DiseaseDetection = styled.button`
         border: 2px solid white; 
     }
 `
-const PatientDetection = styled.div`
+const PatientDetection = styled.button`
     width: 300px;
     height: 160px;
     margin-top: 15px;
-    display: grid;
-    color: #9390FF;
-    background-color: white;
-    text-decoration: none;
     font-size: 20px;
     font-weight: 600;
-    place-items: center;
+    color: #9390FF;
+    background-color: white;
     border: 2px solid #9390FF;
     border-radius: 16px;
     :hover{
-        background-color: #9390FF;
+        background-color: #9390FF;;
         color: white;
-        border: 2px solid white; 
+        border: 2px solid #9390FF;
     }
 `
 
-const AllocateMachine = styled.button`
+const RegisterMachine = styled.button`
     width: 300px;
     padding: 6px;
     margin-top: 15px;

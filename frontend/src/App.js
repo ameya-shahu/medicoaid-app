@@ -11,8 +11,8 @@ import NavbarContainer from './Components/Navbar/NavbarContainer';
 import PatientsList from './Components/PatientMonitoring/PatientsList/PatientsList';
 import PatientDetails from './Components/PatientMonitoring/PatientDetails/PatientDetails';
 import Profile from './Components/DoctorProfile/Profile';
-import RegisterMachine from './Components/RegisterMachine/RegisterMachine';
 import AllocateMachine from './Components/AllocateMachine/AllocateMachine';
+import RegisterMachine from './Components/RegisterMachine/RegisterMachine';
 const App = () => {
 
   const userInfo = useSelector(state => state.userLogin.userInfo);
@@ -22,7 +22,7 @@ const App = () => {
       {
         !userInfo ? (
           <Switch>
-            <Route path='/registermachine' component={RegisterMachine} />
+            <Route path='/newMachine' component={AllocateMachine} />
             <Route path='/register'>
               <Register />
             </Route>
@@ -41,7 +41,7 @@ const App = () => {
               {/* Home page content */}
               <Route path='/addPatient' component={AddPatient} />
               <Route path='/patientslist' component={PatientsList} />
-              <Route path='/allocatemachine' component={AllocateMachine} />
+              <Route path='/registerMachine' component={RegisterMachine} />
               {/* Home page */}
               <Route path="/" component={Home} />
 

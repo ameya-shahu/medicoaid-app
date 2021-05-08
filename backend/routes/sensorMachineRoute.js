@@ -25,7 +25,7 @@ SensorMachineRoute.put(
     expressAsyncHandler(async (req, res)=>{
         const {machineCode, authCode, identifyName, userId } = req.body;
 
-        const machine = SensorMachine.find({machineCode:machineCode});
+        const machine = await SensorMachine.findOne({machineCode:machineCode});
 
         if(! machine){
             throw new Error(JSON.stringify({"sensorMachine": "Machine not exist with given machine code. contact customer care"}))
@@ -37,7 +37,7 @@ SensorMachineRoute.put(
                 }
                 const filter = {machineCode: machineCode};
                 let machine = await SensorMachine.findOneAndUpdate(filter, update,{new: true});
-                req.json(machine);
+                res.json(machine);
             }
         }
 
