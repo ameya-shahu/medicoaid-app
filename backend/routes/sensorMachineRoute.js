@@ -54,9 +54,17 @@ SensorMachineRoute.get(
     expressAsyncHandler(async (req, res)=>{
         const { userId } = req.body;
 
-        const sensorMachines = await SensorMachine.find({allocatedTo: userId});
-
-        res.json(sensorMachines)
+        if(!userId){
+            throw new Error(JSON.stringify({"sensorMachine": "Not Authorized user. contact customer care"}))
+        }else{
+            const user = await User.findOne({_id:userId})
+            if(user){
+                const sensorMachines = await SensorMachine.find({allocatedTo: user._id});
+                res.json(sensorMachines)
+            }else{
+                throw new Error(JSON.stringify({"sensorMachine": "No user found. contact customer care"}))
+            }
+        }
     })
 )
 
