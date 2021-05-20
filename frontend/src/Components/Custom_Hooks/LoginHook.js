@@ -36,4 +36,4 @@ const useFormLogin = (callback, validate) => {
     }
 };
 
-export default useFormLogin;
+export default useFormLogin

@@ -169,7 +169,7 @@ const SubmitButton = styled.button`
     color: white;
     font-weight: 700;
     padding: 10px;
-    border: none;
+    border: 2px solid #9390FF;
     border-radius: 4px;
     :hover{
         background-color: white;

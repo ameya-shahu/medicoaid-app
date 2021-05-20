@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,6 +11,7 @@ import { Divider, FormControl, FormGroup, TextField } from '@material-ui/core';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { initiateMachineAction } from '../../redux/actions/sensorMachine/initiateMachineAction';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -41,14 +42,14 @@ export default function RegisterMachine() {
     const [value, setValue] = useState({
         machineCode: '',
         authCode: '',
-        identification: ''
+        identifyName: ''
     })
-    
+
     const classes = useStyles();
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log(value)
         dispatch(initiateMachineAction(value, 's'));
 
     }
@@ -73,33 +74,43 @@ export default function RegisterMachine() {
                             </Typography>
                             <FormControl>
                                 <FormGroup>
-                                    <TextField 
-                                        className={classes.mt} 
-                                        id="outlined-basic" 
-                                        label="Machine code" 
+                                    <TextField
+                                        className={classes.mt}
+                                        value={value.machineCode}
+                                        name='machineCode'
+                                        id="outlined-basic"
+                                        label="Machine code"
                                         variant="outlined"
-                                        onChange={handleChange} 
+                                        onChange={handleChange}
                                     />
-                                    <TextField 
-                                        className={classes.mt} 
-                                        id="outlined-basic" 
-                                        label="Authentication code" 
-                                        variant="outlined" 
-                                        onChange={handleChange} 
+                                    <TextField
+                                        className={classes.mt}
+                                        value={value.authCode}
+                                        name='authCode'
+                                        id="outlined-basic"
+                                        label="Authentication code"
+                                        variant="outlined"
+                                        onChange={handleChange}
                                     />
-                                    <TextField 
-                                        name='name' 
-                                        className={classes.mt} 
-                                        id="outlined-basic" 
-                                        label="Name your Machine" 
-                                        variant="outlined" 
-                                        onChange={handleChange} 
+                                    <TextField
+                                        className={classes.mt}
+                                        value={value.identifyName}
+                                        name='identifyName'
+                                        id="outlined-basic"
+                                        label="Name your Machine"
+                                        variant="outlined"
+                                        onChange={handleChange}
                                     />
                                 </FormGroup>
                             </FormControl>
                         </CardContent>
                         <Divider variant='middle' />
                         <CardActions className={classes.center}>
+                            {/* Go back on home page button */}
+                            <Link to='/'>
+                                <Button size="medium" type='submit' color='primary' variant='outlined'>Home</Button>
+                            </Link>
+                            {/* Register your machine button */}
                             <Button size="medium" type='submit' color='primary' variant='outlined'>Register</Button>
                         </CardActions>
                     </Card>

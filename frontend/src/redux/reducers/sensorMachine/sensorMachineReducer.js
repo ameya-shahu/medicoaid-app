@@ -1,4 +1,4 @@
-import { INITIATE_MACHINE_FAIL, INITIATE_MACHINE_REQUEST, INITIATE_MACHINE_SUCCESS } from "../../actions/actionTypes"
+import { INITIATE_MACHINE_FAIL, INITIATE_MACHINE_REQUEST, INITIATE_MACHINE_SUCCESS, LOAD_MACHINE_LIST_FAIL, LOAD_MACHINE_LIST_REQUEST, LOAD_MACHINE_LIST_SUCCESS } from "../../actions/actionTypes"
 
 const sensorMachineReducer = (state = {}, action) => {
     switch (action.type) {
@@ -11,6 +11,21 @@ const sensorMachineReducer = (state = {}, action) => {
                 sensorMachine: action.payload,
             }
         case INITIATE_MACHINE_FAIL:
+            return {
+                error: action.payload,
+                loading: false,
+            }
+
+
+        case LOAD_MACHINE_LIST_REQUEST:
+            return {
+                loading: true,
+            }
+        case LOAD_MACHINE_LIST_SUCCESS:
+            return {
+                sensorMachine: action.payload,
+            }
+        case LOAD_MACHINE_LIST_FAIL:
             return {
                 error: action.payload,
                 loading: false,
