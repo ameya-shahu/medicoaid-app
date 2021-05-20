@@ -1,14 +1,17 @@
 import axios from 'axios';
-import { LOAD_MACHINE_LIST_FAIL, LOAD_MACHINE_LIST_REQUEST, LOAD_MACHINE_LIST_SUCCESS } from '../actionTypes';
+import {
+    ASSIGN_MACHINE_FAIL,
+    ASSIGN_MACHINE_REQUEST, ASSIGN_MACHINE_SUCCESS,
+} from '../actionTypes';
 
 
 
-const listMachineAction = (userId) => {
+const assignMachineAction = (patientId, machineId) => {
     return async (dispatch) => {
 
         try {
             dispatch({
-                type: LOAD_MACHINE_LIST_REQUEST
+                type: ASSIGN_MACHINE_REQUEST
             })
             // call to api
             const config = {
@@ -18,8 +21,8 @@ const listMachineAction = (userId) => {
             };
 
 
-            const { data } = await axios.post('/api/sensorMachine/listMachine',
-                { userId },
+            const { data } = await axios.post('/api/sensorMachine/assignMachine',
+                { patientId , machineId},
                 config
 
             );
@@ -27,13 +30,13 @@ const listMachineAction = (userId) => {
 
 
             dispatch({
-                type: LOAD_MACHINE_LIST_SUCCESS,
+                type: ASSIGN_MACHINE_SUCCESS,
                 payload: data
             });
 
         } catch (error) {
             dispatch({
-                type: LOAD_MACHINE_LIST_FAIL,
+                type: ASSIGN_MACHINE_FAIL,
                 payload: error.response && error.response.data.errors
             })
         }
@@ -41,4 +44,4 @@ const listMachineAction = (userId) => {
     }
 }
 
-export { listMachineAction };
+export { assignMachineAction };
