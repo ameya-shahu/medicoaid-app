@@ -50,9 +50,9 @@ SensorMachineRoute.put(
 )
 
 SensorMachineRoute.get(
-    '/listMachine',
+    '/listMachine/:id',
     expressAsyncHandler(async (req, res)=>{
-        const { userId } = req.body;
+        const  userId  = req.params.id;
 
         if(!userId){
             throw new Error(JSON.stringify({"sensorMachine": "Not Authorized user. contact customer care"}))
