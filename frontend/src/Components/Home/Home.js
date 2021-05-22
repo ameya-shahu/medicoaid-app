@@ -67,7 +67,10 @@ function Home({ userInfo }) {
                                 input={<Input id="demo-dialog-native" />}
                             >
                                 <option aria-label="None" value="" />
+                                {/* <option value='ActinicKeratosis'>ActinicKeratosis</option> */}
+                                {/* <option value='BoneFracture'>Bone Fracture</option> */}
                                 <option value='Diabetes'>Diabetes</option>
+                                <option value='Eczema'>Eczema</option>
                                 <option value='Lung_Cancer'>Lung Cancer</option>
                             </Select>
                         </FormControl>

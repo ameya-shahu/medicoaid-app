@@ -26,9 +26,9 @@ const loginUserAction = (email, password) => {
 
             dispatch({
                 type: USER_LOGIN_SUCCESS,
-                payload: data  
+                payload: data
             });
-            
+
             //local storage
             localStorage.setItem('userAuthData', JSON.stringify(data));
 

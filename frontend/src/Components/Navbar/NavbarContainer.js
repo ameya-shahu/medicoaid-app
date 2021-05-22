@@ -8,7 +8,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom';
 
 
 
@@ -48,12 +48,14 @@ export default function NavbarContainer({userInfo}) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  let history = useHistory();
+  const handleLogout = () => {
 
-  const HandleLogout = (e) => {
-    e.preventDefault();
     localStorage.removeItem("userAuthData");
-    window.location.href = "/";
+    history.push('/');
     window.location.reload();
+    // window.location.href = "/login";
+
   }
 
   return (
@@ -63,7 +65,7 @@ export default function NavbarContainer({userInfo}) {
             <Typography variant="h5" className={classes.title}>
                 MedicoAId
             </Typography>
-          
+
             <div>
               <IconButton
                 id='fade-menu'
@@ -100,7 +102,8 @@ export default function NavbarContainer({userInfo}) {
                         <p className={classes.title1}>Home</p>
                     </Link>
                 </MenuItem>
-                <MenuItem onClick={(e) => HandleLogout(e) }>Logout</MenuItem>
+
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
         </Toolbar>

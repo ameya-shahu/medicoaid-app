@@ -28,7 +28,7 @@ app.use('/api/patients',PatientRoute);
 app.use('/api/sensormachine',SensorMachineRoute)
 
 // Public files
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 
 // errorhandler
 app.use(error.errorMiddleware)
