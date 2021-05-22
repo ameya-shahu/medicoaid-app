@@ -39,7 +39,7 @@ function DiseaseDetection() {
     const type = parsed.type;
 
     useEffect(() => {
-        classifier = ml5.imageClassifier("./model/" + type + "/model.json", () => {
+        classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/6euBTjJY-" + "/model.json", () => {
             navigator.mediaDevices
                 .getUserMedia({ video: true, audio: false })
                 .then((stream) => {

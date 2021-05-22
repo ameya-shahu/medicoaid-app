@@ -71,7 +71,7 @@ function Home({ userInfo }) {
                                 {/* <option value='BoneFracture'>Bone Fracture</option> */}
                                 <option value='Diabetes'>Diabetes</option>
                                 <option value='Eczema'>Eczema</option>
-                                <option value='Lung_Cancer'>Lung Cancer</option>
+                                <option value='LungCancer'>Lung Cancer</option>
                             </Select>
                         </FormControl>
                     </form>
