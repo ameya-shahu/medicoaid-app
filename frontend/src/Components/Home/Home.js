@@ -68,7 +68,7 @@ function Home({ userInfo }) {
                             >
                                 <option aria-label="None" value="" />
                                 <option value='Diabetes'>Diabetes</option>
-                                <option value='PrincessFinder'>Princess Finder</option>
+                                <option value='Lung_Cancer'>Lung Cancer</option>
                             </Select>
                         </FormControl>
                     </form>

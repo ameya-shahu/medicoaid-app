@@ -53,14 +53,13 @@ export default function LinearWithValueLabel(props) {
     }
   });
 
-  console.log(props.color)
   return (
     <div className={classes.root}>
       <List>
-        <Divider className='mt-2' />
         <ListItemText>{props.data.label}</ListItemText>
         <ThemeProvider theme={themes}>
           <LinearProgressWithLabel color='primary' className={classes.bar} value={progressData} />
+          <Divider className='mt-2' />
         </ThemeProvider>
       </List>
     </div>

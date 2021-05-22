@@ -75,7 +75,7 @@ const Login = () => {
                                 autoComplete='off'
                                 className={classes.root}
                                 value={values.password || ''}
-                                placeholder='Password'
+                                placeholder='*******'
                                 type='password'
                                 name='password'
                                 onChange={handleChange}
@@ -153,11 +153,11 @@ const CreateAcount = styled.button`
     color: white;
     border: none;
     margin-top: 50px;
-    
+
     p{
         color: white;
         background-color: transparent;
         text-decoration: none;
-    
+
     }
 `

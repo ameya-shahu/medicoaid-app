@@ -20,7 +20,13 @@ const useStyles = makeStyles({
 
 export default function Patient({data}) {
     const classes = useStyles();
-    const URL = '/patientdetails?id=' + data._id;
+    var URL = '';
+    if ( data.sensorMachine ) {
+        URL = '/patientdetails?id=' + data._id + '&m=' + data.sensorMachine.machineCode;
+    } else {
+        URL = '/patientdetails?id=' + data._id + '&m=' + 'emp';
+    }
+
     return (
         <Container>
             <Card className={classes.root}>
@@ -32,9 +38,9 @@ export default function Patient({data}) {
                 </CardContent>
                 <CardActions>
                     <Link to={URL}>
-                        <Button 
-                            size="medium" 
-                            variant='contained' 
+                        <Button
+                            size="medium"
+                            variant='contained'
                             color='primary'
                         >
                             More

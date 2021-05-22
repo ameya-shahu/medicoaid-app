@@ -16,10 +16,9 @@ const listMachineAction = (userId) => {
                     "content-Type": "application/json",
                 },
             };
-
-
-            const { data } = await axios.post('/api/sensorMachine/listMachine',
-                { userId },
+            
+            const url = '/api/sensormachine/listMachine/' + userId;
+            const { data } = await axios.get( url,
                 config
 
             );

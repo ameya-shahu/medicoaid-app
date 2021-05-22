@@ -7,6 +7,7 @@ import {
 
 
 const assignMachineAction = (patientId, machineId) => {
+    console.log(patientId, machineId)
     return async (dispatch) => {
 
         try {
@@ -22,7 +23,7 @@ const assignMachineAction = (patientId, machineId) => {
 
 
             const { data } = await axios.post('/api/sensorMachine/assignMachine',
-                { patientId , machineId},
+                { patientId , machineId },
                 config
 
             );
