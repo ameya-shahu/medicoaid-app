@@ -29,8 +29,13 @@ const PatientSchema = new mongoose.Schema({
         type: Array,
     },
     sensorMachine: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SensorMachine'
+        machineId:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'SensorMachine'
+        },
+        machineCode:{
+            type:String
+        }
     }
 });
 

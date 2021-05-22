@@ -74,10 +74,17 @@ SensorMachineRoute.post(
     expressAsyncHandler(async (req, res)=>{
         const {patientId, machineId} = req.body;
 
-        const patient =  await Patient.findOneAndUpdate({_id:patientId}, {sensorMachine: machineId},{new:true});
+        var patient =  await Patient.find({_id:patientId});
 
         if(patient){
             const sensorMachine =  await SensorMachine.findOneAndUpdate({_id:machineId}, {inUse: true},{new:true})
+            console.log(sensorMachine)
+            let sensorMachineUpdate = {
+                machineId: sensorMachine._id,
+                machineCode: sensorMachine.machineCode
+            }
+            patient = await Patient.findOneAndUpdate({_id:patientId}, {sensorMachine:sensorMachineUpdate},{new:true})
+
             res.json({ sensorMachine, patient })
         }
     })

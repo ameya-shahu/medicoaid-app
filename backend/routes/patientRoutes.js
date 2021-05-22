@@ -46,7 +46,7 @@ PatientRoute.get(
             .sort({name:1})
             .limit(limit)
             .skip(skipIndex)
-            .select(['name', 'gender', 'age'])
+            .select(['name', 'gender', 'age','sensorMachine'])
             .exec();
 
         if (patientList.length>0){
