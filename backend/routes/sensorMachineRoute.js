@@ -12,12 +12,17 @@ let SensorMachineRoute = express.Router()
 SensorMachineRoute.post(
     '/newmachine',
     expressAsyncHandler(async (req, res)=>{
-        const { machineCode } = req.body
+        const { machineCode, authCode } = req.body
         const existMachine = await SensorMachine.findOne({ machineCode: machineCode })
         if(existMachine){
             throw new Error(JSON.stringify({"sensorMachine": "Machine already exist with given machineCode"}))
         }else{
-            const machine = await SensorMachine.create(req.body);
+            let newMachine = {
+                machineCode: machineCode,
+                authCode: authCode,
+                inUse : false
+            }
+            const machine = await SensorMachine.create(newMachine);
             res.json(machine)
         }
     })
@@ -27,7 +32,7 @@ SensorMachineRoute.put(
     '/allocateMachine',
     expressAsyncHandler(async (req, res)=>{
         const {machineCode, authCode, identifyName, userId } = req.body;
-
+        console.log(userId);
         const machine = await SensorMachine.findOne({machineCode:machineCode});
 
         if(! machine){
@@ -59,7 +64,7 @@ SensorMachineRoute.get(
         }else{
             const user = await User.findOne({_id:userId})
             if(user){
-                const sensorMachines = await SensorMachine.find({allocatedTo: user._id});
+                const sensorMachines = await SensorMachine.find({allocatedTo: user._id,inUse:false});
                 res.json(sensorMachines)
             }else{
                 throw new Error(JSON.stringify({"sensorMachine": "No user found. contact customer care"}))
@@ -94,12 +99,22 @@ SensorMachineRoute.post(
     '/freeMachine',
     expressAsyncHandler(async (req, res)=>{
         const {patientId, machineId} = req.body;
-
+        console.log(machineId);
         const patient =  await Patient.findOneAndUpdate({_id:patientId}, {sensorMachine: null},{new:true});
 
         if(patient){
-            const sensorMachine =  await SensorMachine.findOneAndUpdate({_id:machineId}, {inUse: false},{new:true})
-            res.json({ sensorMachine, patient })
+            try {
+                const sensorMachine =  await SensorMachine.findOneAndUpdate({_id:machineId}, {inUse: false},{new:true})
+                console.log("check here ---");
+                console.log(sensorMachine);
+                res.json({ sensorMachine, patient })
+            }catch(error){
+                console.error(error)
+                throw new Error(JSON.stringify({"sensorMachine": "machine id bad request. contact customer care"}))
+            }
+        }else{
+            res.status(400);
+            throw new Error(JSON.stringify({"sensorMachine": "patient id or machine id bad request. contact customer care"}))
         }
     })
 )

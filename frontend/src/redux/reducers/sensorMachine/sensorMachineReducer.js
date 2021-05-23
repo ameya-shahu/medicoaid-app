@@ -2,6 +2,9 @@ import {
     ASSIGN_MACHINE_FAIL,
     ASSIGN_MACHINE_REQUEST,
     ASSIGN_MACHINE_SUCCESS,
+    FREE_MACHINE_FAIL,
+    FREE_MACHINE_REQUEST,
+    FREE_MACHINE_SUCCESS,
     INITIATE_MACHINE_FAIL,
     INITIATE_MACHINE_REQUEST,
     INITIATE_MACHINE_SUCCESS,
@@ -42,7 +45,6 @@ const sensorMachineReducer = (state = {}, action) => {
             }
 
 
-
         case ASSIGN_MACHINE_REQUEST:
             return {
                 AssignMachineLoading: true,
@@ -58,9 +60,24 @@ const sensorMachineReducer = (state = {}, action) => {
             }
 
 
+        case FREE_MACHINE_REQUEST:
+            return {
+                freeMachineLoading: true,
+            }
+        case FREE_MACHINE_SUCCESS:
+            return {
+                sensorMachine: action.payload,
+            }
+        case  FREE_MACHINE_FAIL:
+            return {
+                error: action.payload,
+                freeMachineLoading: false,
+            }
+
+
         default:
             return state;
     }
 }
 
-export { sensorMachineReducer };
+export {sensorMachineReducer};

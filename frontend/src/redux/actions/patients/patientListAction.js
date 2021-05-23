@@ -13,7 +13,7 @@ const patientListAction = () => {
             //     }
             // }
             
-            const { data } = await axios.get('api/patients');
+            const { data } = await axios.get('/api/patients/');
 
             dispatch({
                 type: FETCH_PATIENT_SUCCESS,

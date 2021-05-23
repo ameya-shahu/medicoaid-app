@@ -45,9 +45,9 @@ export default function AllocateMachine() {
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-
         dispatch(initiateMachineAction(value, 'r'));
-
+        alert("Machine Added successfully..!")
+        setValue({machineCode: "", authCode: ""});
     }
 
     const handleChange = (e) => {

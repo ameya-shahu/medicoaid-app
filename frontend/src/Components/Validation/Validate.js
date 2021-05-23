@@ -7,8 +7,6 @@ export default function logInvalidate(values) {
     }
     if (!values.password) {
       errors.password = 'Password is required';
-    } else if (values.password.length < 6) {
-      errors.password = 'Password must be 6 or more characters';
     }
     return errors;
   };

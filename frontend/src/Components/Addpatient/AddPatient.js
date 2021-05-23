@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Form, Col } from 'react-bootstrap'
@@ -43,13 +44,14 @@ function ThankYou() {
     })
     
     const dispatch = useDispatch();
-    
+    const history = useHistory();
     const handleSubmit = (e) => {
         e.preventDefault();
         const tempDate = state.dateOfBirth;
         console.log(tempDate);
         dispatch(registerPatientAction(state));
-
+        alert("Patient Added successfully..!")
+        history.push("/");
     }
 
     const handleChange = (e) => {

@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 import { Divider, FormControl, FormGroup, TextField } from '@material-ui/core';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { initiateMachineAction } from '../../redux/actions/sensorMachine/initiateMachineAction';
 import { Link } from 'react-router-dom';
 
@@ -47,11 +47,26 @@ export default function RegisterMachine() {
 
     const classes = useStyles();
     const dispatch = useDispatch();
-    const handleSubmit = (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
-        console.log(value)
-        dispatch(initiateMachineAction(value, 's'));
+        const user = JSON.parse(localStorage.getItem("userAuthData"));
 
+        console.log(user)
+        console.log(value)
+        let resJson = {
+            userId:user.id,
+            machineCode: value.machineCode,
+            authCode: value.authCode,
+            identifyName: value.identifyName
+        }
+
+        dispatch(initiateMachineAction(resJson, 's'));
+        alert("Machine register on your ID successfully..!");
+        setValue({
+            machineCode: '',
+            authCode: '',
+            identifyName: ''
+        })
     }
 
     const handleChange = (e) => {

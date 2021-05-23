@@ -1,5 +1,6 @@
 import { Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 import React, { useEffect } from 'react'
+import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import { listMachineAction } from '../../../redux/actions/sensorMachine/listMachineAction';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,32 +35,34 @@ function AsignMachine({ patientId }) {
     }, [dispatch, userInfo])
 
     const { sensorMachine, MachineListLoading } = useSelector(state => state.sensorMachine)
-    // console.log(sensorMachine, MachineListLoading)
 
     if (sensorMachine) {
         machineList = sensorMachine
-        // console.log(machineList[0].id)
+        console.log(sensorMachine);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const history = useHistory();
 
-        let machineId = machine;
+    const handleSubmit = () => {
+
+        let machineState = machine.split('/');
+        let machineId = machineState[0];
+        let machineCode = machineState[1];
 
         dispatch(assignMachineAction(patientId, machineId));
+        history.push("/patientdetails?id="+patientId+"&m="+machineCode);
         window.location.reload();
     }
 
     const handleChange = (event) => {
         let value = event.target.value;
         setMachine(value);
-
+        console.log(event.target);
         if (value != null && value != 'None') {
             setIsDisabled(false);
         } else if ( event.target.value === "None") {
             setIsDisabled(true);
         }
-        // console.log(event.target)
     };
 
     const handleClose = () => {
@@ -71,7 +74,7 @@ function AsignMachine({ patientId }) {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <h4 className='mt-3'>No machine is asign to this patient.</h4>
+            <h4 className='mt-3'>No machine is assign to this patient.</h4>
             <FormControl className={classes.formControl}>
                 <InputLabel id="demo-controlled-open-select-label">machines</InputLabel>
 
@@ -112,7 +115,7 @@ function AsignMachine({ patientId }) {
                                     // console.log(data.id)
                                     return (
 
-                                        <MenuItem value={data.id} key={index}>{data.identifyName}</MenuItem>
+                                        <MenuItem value={data.id + "/" +data.machineCode}  key={index}>{data.identifyName}</MenuItem>
                                     )
                                 })
                             }
@@ -120,7 +123,12 @@ function AsignMachine({ patientId }) {
                     )
                 }
 
-                <Button className='mt-3' type='submit' variant='outlined' color='primary' disabled={isDisable}>Asign now</Button>
+                <Button className='mt-3'
+                        variant='outlined'
+                        color='primary'
+                        disabled={isDisable}
+                        onClick ={()=>handleSubmit()}
+                >Assign now</Button>
             </FormControl>
         </form >
     )

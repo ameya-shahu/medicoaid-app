@@ -19,7 +19,6 @@ const UserSchema = new mongoose.Schema({
     phoneNo:{
         type: String,
         required: [true, 'Please enter phone number'],
-        match: [ /^\d{12}$/, 'Please enter valid phoneNo']
     },
     password: {
         type: String,

@@ -13,7 +13,7 @@ const patientDetailsAction = (id) => {
             //     }
             // }
 
-            const { data } = await axios.get('api/patients/'+ id);
+            const { data } = await axios.get('/api/patients/'+ id);
 
             dispatch({
                 type: PATIENT_DETAILS_SUCCESS,

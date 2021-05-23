@@ -72,6 +72,7 @@ function Home({ userInfo }) {
                                 <option value='diabetes'>Diabetes</option>
                                 <option value='eczema'>Eczema</option>
                                 <option value='lungcancer'>Lung Cancer</option>
+                                <option value='covid'>Chest Xray Classify (Pneumonia)</option>
                             </Select>
                         </FormControl>
                     </form>

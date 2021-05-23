@@ -3,7 +3,7 @@ import { INITIATE_MACHINE_FAIL, INITIATE_MACHINE_REQUEST, INITIATE_MACHINE_SUCCE
 
 const initiateMachineAction = (value, type) => {
     return async (dispatch) => {
-
+        console.log(value);
         try {
             dispatch({
                 type: INITIATE_MACHINE_REQUEST

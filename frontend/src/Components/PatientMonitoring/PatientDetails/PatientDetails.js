@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react'
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { Button, Divider, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Select } from '@material-ui/core';
+
 import styled from 'styled-components'
 import queryString from 'query-string'
-import { patientDetailsAction } from '../../../redux/actions/patients/patientDetailsAction';
-import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
-import { Button, Divider, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Select } from '@material-ui/core';
-import PatientChart from '../PatientChart/PatientChart';
 
-import firebase from '../../Firebase/Firebase';
-import { firebasePatientAction } from '../../../redux/actions/patients/firebasePatientAction';
+import PatientChart from '../PatientChart/PatientChart';
 import AsignMachine from '../AsignMachine/AsignMachine';
+import firebase from '../../Firebase/Firebase';
+
+import {freeMachineAction} from "../../../redux/actions/sensorMachine/freeMachineAction";
+import { patientDetailsAction } from '../../../redux/actions/patients/patientDetailsAction';
+import { firebasePatientAction } from '../../../redux/actions/patients/firebasePatientAction';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,6 +42,13 @@ function PatientDetails() {
 
     //dispatching patient details action
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    const handleClick = (patientId, sensorId)=>{
+        dispatch(freeMachineAction(patientId, sensorId));
+        history.push("/patientdetails?id="+patientId);
+        window.location.reload();
+    }
 
     const { details, loading } = useSelector(state => state.patientDetail);
     // const { data } = useSelector(state => state);
@@ -130,7 +142,17 @@ function PatientDetails() {
                             {/*  calling chart js component */}
                             {
                                 !loading && details.sensorMachine ? (
-                                    <PatientChart />
+                                    <div>
+                                        <PatientChart />
+                                        <Button className='mt-3'
+                                                type='submit'
+                                                variant='outlined'
+                                                color='primary'
+                                                onClick={()=> handleClick(details.id, details.sensorMachine.machineId)}
+                                        >Free Machine</Button>
+                                    </div>
+
+
                                 ) : (
                                     <AsignMachine patientId={details.id} />
                                 )
