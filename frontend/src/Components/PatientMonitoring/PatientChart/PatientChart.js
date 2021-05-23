@@ -8,16 +8,16 @@ const PatientChart = () => {
   var [updatepulse, setUpdatepulse] = useState([]);
   const {details} = useSelector(state => state.firebase)
   useEffect(() => {
-    
+
     // console.log(details);
     if( details && details.type === 's'){
       setUpdatespo2 ( details.data);
     }
     else if (details && details.type === 'p') {
       setUpdatepulse(details.data);
-    }  
+    }
   }, [setUpdatespo2, setUpdatepulse, details])
-  
+
   const chartData1 = {
     labels: ['0', '1', '2', '2', '4', '5'],
     datasets: [
@@ -44,7 +44,7 @@ const PatientChart = () => {
       },
     ],
   };
-  
+
   const options = {
     responsive: true,
     legend: {
@@ -59,7 +59,7 @@ const PatientChart = () => {
       </div>
       <Line data={chartData1} options={options} />
       <Line data={chartData2} options={options} />
-
+      <Button className='mt-3' type='submit' variant='outlined' color='primary'>Free Machine</Button>
     </React.Fragment>
   )
 
@@ -70,7 +70,7 @@ export default PatientChart
 
 
 // setInterval(function () {
-  
+
   //   var currentState = spo2;
   //   if (currentState.length < 6){
   //     var SPO2 = [...currentState, 19];
@@ -79,7 +79,7 @@ export default PatientChart
   //     currentState.shift();
   //     currentState.push(15);
   //     setSpo2(currentState);
-      
+
   //   }
   //   console.log(currentState);
   // }, 5000);
