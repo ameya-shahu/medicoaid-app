@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Line} from 'react-chartjs-2';
 import {useDispatch, useSelector} from 'react-redux';
-import Button from "@material-ui/core/Button";
 import {freeMachineAction} from "../../../redux/actions/sensorMachine/freeMachineAction";
 
 

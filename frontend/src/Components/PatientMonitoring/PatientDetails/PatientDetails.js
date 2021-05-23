@@ -122,20 +122,20 @@ function PatientDetails() {
                                     </ListItemAvatar>
                                     <ListItemText primary={details.gender} > </ListItemText>
                                 </ListItem>
-                                <Divider variant='middle' component="li" />
-                                <ListItem>
+                                {/* <Divider variant='middle' component="li" /> */}
+                                {/* <ListItem>
                                     <ListItemAvatar>
                                         <h5>Age:&nbsp; </h5>
                                     </ListItemAvatar>
-                                    {/* <ListItemText primary={details.age.toString()} > </ListItemText> */}
+                                    <ListItemText primary={details.age.toString()} > </ListItemText>
                                 </ListItem>
                                 <Divider variant='middle' component="li" />
                                 <ListItem>
                                     <ListItemAvatar>
                                         <h5>Date of Birth:&nbsp; </h5>
                                     </ListItemAvatar>
-                                    {/* <ListItemText primary={details.phoneNo.toString()} > </ListItemText> */}
-                                </ListItem>
+                                    <ListItemText primary={details.phoneNo.toString()} > </ListItemText>
+                                </ListItem> */}
                             </List>
                             <Divider />
 
